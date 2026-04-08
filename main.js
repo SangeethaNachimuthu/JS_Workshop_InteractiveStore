@@ -29,8 +29,12 @@ function addToCart(productId) {
     // TODO: Add to cart array
     // TODO: Update cart count UI
     // TODO: Save to localStorage
+    const itemToAdd = products.find(product => product.id === productId)
+    cart.push(itemToAdd)
+    cartCount.textContent = cart.length
+    alert("Added to cart!")
+    localStorage.setItem("cart", JSON.stringify(cart))
 }
-
 // 5. Update Cart Count UI
 function updateCartCount() {
     // TODO: Set textContent of cartCount
