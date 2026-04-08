@@ -31,14 +31,22 @@ function addToCart(productId) {
     // TODO: Save to localStorage
     const itemToAdd = products.find(product => product.id === productId)
     cart.push(itemToAdd)
-    cartCount.textContent = cart.length
-    alert("Added to cart!")
     localStorage.setItem("cart", JSON.stringify(cart))
+    updateCartCount()
+    alert("Added to cart!")
+
 }
 // 5. Update Cart Count UI
 function updateCartCount() {
     // TODO: Set textContent of cartCount
     // TODO: Show/hide cartCount based on items
+    cartCount.textContent = cart.length
+
+    if(cart.length === 0) {
+        cartCount.style.display = 'none'
+    } else {
+        cartCount.style.display = 'inline-block'
+    }
 }
 
 // 6. Event Listeners
@@ -88,6 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // TODO: Load cart from localStorage
     // TODO: Update cart count UI
     // TODO: Render all products initially
+    const savedCart = localStorage.getItem("cart")
+    if(savedCart) {
+        cart = JSON.parse(savedCart)
+    }
+    updateCartCount()
+
     renderProducts(products);
 });
 
