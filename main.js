@@ -50,6 +50,27 @@ categoryFilters.forEach(filter => {
     filter.addEventListener('change', () => {
         // TODO: Collect active categories
         // TODO: Filter products and re-render
+        const checkedCategories = document.querySelectorAll(".category-filter:checked")
+        // Convert to array of values
+        const selectedCategories = Array.from(checkedCategories)
+                                            .map(checkBox => checkBox.value);
+        //If "All" OR nothing selected → show all
+        if (selectedCategories.length === 0 || selectedCategories.includes("All")) {
+            renderProducts(products);
+            return;
+        }
+
+        // Filter products
+        const filteredProducts = products.filter(product =>
+            selectedCategories.includes(product.category)
+        );
+        // Render filtered products
+        if(selectedCategories.includes("all")) {
+            renderProducts(products)
+        } else {
+            renderProducts(filteredProducts);
+        }
+
     });
 });
 
