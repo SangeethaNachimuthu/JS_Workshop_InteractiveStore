@@ -42,6 +42,11 @@ function updateCartCount() {
 if (searchInput) {
     searchInput.addEventListener('input', (e) => {
         // TODO: Filter products by name or description
+        const searchName = e.target.value.toLowerCase();
+        //console.log(searchName)
+        const filteredProduct = products.filter(product =>
+            product.name.toLowerCase().includes(searchName));
+        renderProducts(filteredProduct)
     });
 }
 
