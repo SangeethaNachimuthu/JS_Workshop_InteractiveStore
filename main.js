@@ -9,6 +9,7 @@ const searchInput = document.getElementById('search-input');
 const cartCount = document.getElementById('cart-count');
 const categoryFilters = document.querySelectorAll('.category-filter');
 
+
 // 3. Render Products Function
 function renderProducts(productsToRender) {
     // TODO: Clear productGrid
@@ -144,3 +145,44 @@ function createProductCard(product) {
     `;
 }
 
+function renderCart() {
+
+    const cartGrid = document.getElementById('cart-grid');
+    cartGrid.innerHTML = "";
+
+    if(cart.length === 0) {
+        cartGrid.innerHTML = "<p>Your cart is empty!</p>";
+         return;
+    }
+
+    cart.forEach(item => {
+        const innerHTMLItem = `
+            <div class="w-92 h-12 ">
+                <div class="flex justify-between items-center gap-8 w-92 h-12 p-2">
+                    <span class="">${item.name}</span>
+                    <span>${item.price}</span>  
+                    <button onclick="removeItem(${item.id})" class="text-red-500">
+                        Remove
+                    </button> 
+                </div>
+            </div>
+        `;
+        cartGrid.innerHTML += innerHTMLItem;
+    })
+}
+
+function openCart() {
+    renderCart();
+    document.getElementById('cart-modal').classList.remove("hidden")
+}
+
+function closeCart() {
+    document.getElementById('cart-modal').classList.add("hidden")
+}
+
+function removeItem(productId) {
+    cart = cart.filter(item => item.id !== productId)
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
