@@ -95,3 +95,11 @@ Make sure the cart items stay there even if the page is refreshed.
 1. Every time `addToCart` is called, save the `cart` array to `localStorage` using `JSON.stringify()`.
 2. When the page loads, check `localStorage` for any saved cart data using `JSON.parse()`.
 3. Update the cart counter immediately on page load.
+
+---
+
+## Additional Task
+Add View Cart functionality, Remove Item from the cart and update the cart count.
+- Clicking the cart icon opens a popup displaying all added items with their name and price. If no items are present, a message is shown.
+- Each cart item includes a remove button. Clicking it removes the item from the cart, updates the UI, and syncs with localStorage.
+- The cart count in the header updates dynamically whenever items are added or removed.
